@@ -10,7 +10,10 @@ def index(request):
         if form.is_valid():
             csv_file = request.FILES['file'].read().decode('utf-8')
             data = StringIO(csv_file)
-            df = carregar_e_preprocessar_dados(data)
+            try:
+                df = carregar_e_preprocessar_dados(data)
+            except ValueError as e:
+                return HttpResponse(str(e))
             suporte_minimo = 0.01
             try:
                 conjuntos_itens_frequentes = gerar_conjuntos_itens_frequentes(df, suporte_minimo)

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 import numpy as np
 import pandas as pd
 from mlxtend.preprocessing import TransactionEncoder
@@ -8,6 +9,8 @@ def remover_todos_zeros_da_lista(lista):
 
 def carregar_e_preprocessar_dados(arquivo_path):
     df = pd.read_csv(arquivo_path, header = None)
+    if len(df) > 2000:
+        raise ValueError('Arquivo CSV muito grande. Envie uma base de dados com até 2000 linhas.')
     df.replace(np.nan, 0, inplace=True)
 
     lista_todas_transacoes = []
