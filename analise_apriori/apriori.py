@@ -22,7 +22,7 @@ def carregar_e_preprocessar_dados(arquivo_path):
     df = pd.DataFrame(te_ary, columns=te.columns_)
     return df
 
-def gerar_conjuntos_itens_frequentes(df, suporte_minimo = 0.01):
+def gerar_conjuntos_itens_frequentes(df, suporte_minimo):
     conjuntos_itens_frequentes = apriori(df, min_support = suporte_minimo, use_colnames = True)
     return conjuntos_itens_frequentes
 
