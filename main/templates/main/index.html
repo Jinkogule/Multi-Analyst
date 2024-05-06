@@ -7,7 +7,14 @@
 </head>
     </head>
     <body>
-        <h1>Teste</h1>
+        {{ regras|safe }}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+        </form>
+
         <script src="{% static 'main/script.js' %}"></script>
     </body>
 </html>

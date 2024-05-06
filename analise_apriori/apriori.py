@@ -30,9 +30,3 @@ def gerar_regras(conjuntos_itens_frequentes, metrica = "confidence", limiar_mini
     regras = association_rules(conjuntos_itens_frequentes, metric = metrica, min_threshold = limiar_minimo)
     regras.sort_values(by=['lift'], ascending = False, inplace = True)
     return regras
-
-"""" Teste sobre base de dados local
-df = carregar_e_preprocessar_dados("C:\\Users\\Lucas\\Downloads\\archive\\groceries.csv")
-conjuntos_itens_frequentes = gerar_conjuntos_itens_frequentes(df)
-regras = gerar_regras(conjuntos_itens_frequentes)
-"""
