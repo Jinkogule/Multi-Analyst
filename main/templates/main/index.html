@@ -7,18 +7,10 @@
 </head>
     </head>
     <body>
-        {{ regras|safe }}
-
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'analise_basica' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
 
-            <label for="colunas">Colunas:</label>
-            <select name="colunas" id="colunas" multiple>
-                {% for coluna in colunas %}
-                    <option value="{{ coluna }}">{{ coluna }}</option>
-                {% endfor %}
-            </select>
             <button type="submit">Enviar</button>
         </form>
 
