@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from analise_apriori.apriori import carregar_e_preprocessar_dados, gerar_conjuntos_itens_frequentes, gerar_regras, obter_colunas
+import pandas as pd
+from analise_apriori.apriori import carregar_dados, preprocessar_dados, gerar_regras_minimo, obter_colunas
 from io import StringIO
 from analise_apriori.forms import UploadFileForm
 
@@ -14,21 +15,32 @@ def index(request):
 def analise_basica(request):
     form = UploadFileForm(request.POST, request.FILES)
     if form.is_valid():
-        csv_file = request.FILES['file'].read().decode('utf-8')
-        data = StringIO(csv_file)
-        colunas = obter_colunas(csv_file)
         try:
-            df = carregar_e_preprocessar_dados(data)
-        except ValueError as e:
-            return HttpResponse(str(e))
-        suporte_minimo = 0.01
+            csv_file = request.FILES['file'].read().decode('utf-8')
+            dados = StringIO(csv_file)
+            colunas = obter_colunas(csv_file)
+        except UnicodeDecodeError as e:
+            return HttpResponse(f'Erro ao decodificar o CSV: {str(e)}')
+
         try:
-            conjuntos_itens_frequentes = gerar_conjuntos_itens_frequentes(df, suporte_minimo)
-            regras = gerar_regras(conjuntos_itens_frequentes)
-            regras_html = regras.to_html()
+            dados_string = carregar_dados(dados)
+            df = preprocessar_dados(dados_string)
+        except pd.errors.ParserError as e:
+            return HttpResponse(f'Erro ao carregar ou preprocessar os dados: {str(e)}')
+
+        try:
+            regras = gerar_regras_minimo(df)
+            regras_html = []
+            for regra in regras:
+                df, descricao = regra
+                regras_html.append(df.to_html())
         except ValueError as e:
-            return HttpResponse(f'Não é possível analisar esta base de dados sobre as configurações atuais (itemsets vazios para suporte mínimo={suporte_minimo})')
-        return render(request, 'main/analise_basica.html', {'regras': regras_html, 'colunas': colunas})
+            return HttpResponse(f'Erro ao gerar regras: {str(e)}')
+
+        return render(request, 'main/analise_basica.html', {'regras': regras, 'colunas': colunas})
+    else:
+        return HttpResponse(f'Formulário inválido: {form.errors}')
+
 
 def analise_especifica(request):
     return HttpResponse(f'teste')

@@ -8,18 +8,23 @@
 </head>
     </head>
     <body>
-        {{ regras|safe }}
+        <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff">
+            {% for regra in regras %}
+                <p>{{ regra.1 }}</p>
+                {{ regra.0.to_html|safe }}
+            {% endfor %}
 
       
-        <form method="POST" action="{% url 'analise_especifica' %}">
-            {% csrf_token %}
-            <select name="colunas" id="colunas" multiple>
-                {% for coluna in colunas %}
-                    <option value="{{ coluna }}">{{ coluna }}</option>
-                {% endfor %}
-            </select>
-            <button type="submit">Analisar colunas selecionadas</button>
-        </form>
+            <form method="POST" action="{% url 'analise_especifica' %}">
+                {% csrf_token %}
+                <select name="colunas" id="colunas" multiple>
+                    {% for coluna in colunas %}
+                        <option value="{{ coluna }}">{{ coluna }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Analisar colunas selecionadas</button>
+            </form>
+        </div>
         <script src="{% static 'main/script.js' %}"></script>
     </body>
 </html>
