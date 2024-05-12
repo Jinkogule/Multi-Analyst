@@ -1,0 +1,19 @@
+<form method="post" action="{% url 'chat_view' %}">
+
+    {% csrf_token %}
+    
+    <label for="user_input">User:</label>
+    
+    <input type="text" name="user_input" required>
+    
+    <input type="hidden" name="chat_history" value="{{ chat_history }}">
+    
+    <button type="submit">Send</button>
+    
+    </form>
+    
+    <div>
+    
+    <p>{{ chat_history|linebreaks }}</p>
+    
+    </div>

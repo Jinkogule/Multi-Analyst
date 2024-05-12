@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'main',
     'analise_apriori',
     'bootstrap4',
+    'openai',
+    'openai_chat'
 ]
 
 MIDDLEWARE = [
