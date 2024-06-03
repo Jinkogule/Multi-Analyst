@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import pandas as pd
-from analise_apriori.apriori import carregar_dados, preprocessar_dados, gerar_regras_minimo, obter_colunas
+from analise_apriori.apriori import carregar_dados, preprocessar_dados, gerar_regras_minimo #obter_colunas
 from io import StringIO
 from analise_apriori.forms import UploadFileForm
+import chardet
 
 def index(request):
     if request.method == 'POST':
@@ -16,12 +17,19 @@ def analise_basica(request):
     form = UploadFileForm(request.POST, request.FILES)
     if form.is_valid():
         try:
-            csv_file = request.FILES['file'].read().decode('utf-8')
+            try:
+                csv_file = request.FILES['file'].read().decode('utf-8')
+            except:
+                rawdata = request.FILES['file'].read()
+                result = chardet.detect(rawdata)
+                encoding = result['encoding']
+                if encoding is None:
+                    encoding = 'iso-8859-1'
+                csv_file = rawdata.decode(encoding)
             dados = StringIO(csv_file)
-            colunas = obter_colunas(csv_file)
+            """colunas = obter_colunas(csv_file)"""
         except UnicodeDecodeError as e:
             return HttpResponse(f'Erro ao decodificar o CSV: {str(e)}')
-
         try:
             dados_string = carregar_dados(dados)
             df = preprocessar_dados(dados_string)
@@ -37,10 +45,9 @@ def analise_basica(request):
         except ValueError as e:
             return HttpResponse(f'Erro ao gerar regras: {str(e)}')
 
-        return render(request, 'main/analise_basica.html', {'regras': regras, 'colunas': colunas})
+        return render(request, 'main/analise_basica.html', {'regras': regras})
     else:
         return HttpResponse(f'Formulário inválido: {form.errors}')
-
 
 def analise_especifica(request):
     return HttpResponse(f'teste')
