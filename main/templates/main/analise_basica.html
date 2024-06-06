@@ -13,9 +13,9 @@
         <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff">
             {% for regra in regras %}
                 <p>{{ regra.1 }}</p>
-                {{ regra.0.to_html|safe }}
+                {{ regra.0|safe }}
             {% endfor %}
-
+    
             <form method="POST" action="{% url 'analise_especifica' %}">
                 {% csrf_token %}
                 <select name="colunas" id="colunas" multiple>
