@@ -1,12 +1,30 @@
 body{
     margin: 0 auto;
-    background-color: rgb(63, 63, 63);
+    background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);
 }
 
 .container{
     margin: 0 auto;
 }
 
+.container-navbar{
+    margin: 0 auto;
+}
+@media (min-width: 800px) {
+    .container-navbar{
+        padding: 5px;
+        width: 1320px;   
+    }
+}
+
+.bg-cyan-700{
+    background-color: #2e716e;
+}
+
 table{
     color: #FFF;
+}
+
+.navbar-brand{
+    color: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(46,86,113,1) 100%);
 }

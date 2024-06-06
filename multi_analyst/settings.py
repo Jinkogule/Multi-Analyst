@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'analise_apriori',
-    'bootstrap4',
+    'bootstrap5',
     'openai',
     'openai_chat'
 ]

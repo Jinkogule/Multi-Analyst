@@ -18,9 +18,9 @@ def analise_basica(request):
     if form.is_valid():
         try:
             try:
-                csv_file = request.FILES['file'].read().decode('utf-8')
+                csv_file = request.FILES['csv_file'].read().decode('utf-8')
             except:
-                rawdata = request.FILES['file'].read()
+                rawdata = request.FILES['csv_file'].read()
                 result = chardet.detect(rawdata)
                 encoding = result['encoding']
                 if encoding is None:

@@ -5,17 +5,17 @@
     <head>
         <title>Multi Analyst</title>
         <link rel="stylesheet" href="{% static 'main/style.css' %}">
-        <script src="{% static 'main/jquery-3.7.1.min.js' %}"></script>
+        {% include 'comuns/bootstrap_e_static.html' %}
 </head>
     </head>
     <body>
+        {% include 'comuns/header.html' %}
         <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff">
             {% for regra in regras %}
                 <p>{{ regra.1 }}</p>
                 {{ regra.0.to_html|safe }}
             {% endfor %}
 
-      
             <form method="POST" action="{% url 'analise_especifica' %}">
                 {% csrf_token %}
                 <select name="colunas" id="colunas" multiple>
