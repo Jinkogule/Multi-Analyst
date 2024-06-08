@@ -11,6 +11,11 @@
     <body>
         {% include 'comuns/header.html' %}
         <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff">
+            {% if error_message %}
+                <div style="color: rgb(201, 16, 16);">
+                    {{ error_message }}
+                </div>
+            {% endif %}
             {% for regra in regras %}
                 <p>{{ regra.1 }}</p>
                 {{ regra.0|safe }}
