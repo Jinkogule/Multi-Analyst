@@ -4,18 +4,13 @@ from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 from analise_apriori.utils import detectar_header, remover_todos_zeros_da_lista, detectar_delimitador
 
-def carregar_dados(arquivo_path):
-    """Carrega dados de um arquivo CSV e detecta seu delimitador e header."""
-    delimiter = detectar_delimitador(arquivo_path)
-    arquivo_path.seek(0)
-    has_header = detectar_header(arquivo_path, delimiter)
+def carregar_dados(csv_data_string_io):
+    delimiter = detectar_delimitador(csv_data_string_io)
+    csv_data_string_io.seek(0)
+    has_header = detectar_header(csv_data_string_io)
     header_option = 0 if has_header else None
-
-    print(f"Delimiter detected: {delimiter}")
-    print(f"Header detected: {has_header}")
-
-    arquivo_path.seek(0)
-    df = pd.read_csv(arquivo_path, header=header_option, sep=delimiter)
+    csv_data_string_io.seek(0)
+    df = pd.read_csv(csv_data_string_io, header=header_option, sep=delimiter)
     df.replace(np.nan, 0, inplace=True)
     return df
 
