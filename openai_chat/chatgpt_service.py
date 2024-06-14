@@ -1,6 +1,7 @@
 import openai
+from django.conf import settings
 
-openai.api_key = 'sk-proj-yr3h5dBAyOZv4GV0GWaqT3BlbkFJ7iYbVFpGvjVzw35fDwJj'
+openai.api_key = settings.OPENAI_API_KEY
 
 def generate_response(prompt):
     response = openai.ChatCompletion.create(

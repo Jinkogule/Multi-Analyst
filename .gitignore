@@ -1,3 +1,17 @@
+#Django
 __pycache__/
+db.sqlite3
+/media
+/static
+
+#Python bytecode
 *.py[cod]
+
+#Jupyter Notebook
 .ipynb_checkpoints/
+
+#Ambientes
+.env
+
+#Outros
+*.log
