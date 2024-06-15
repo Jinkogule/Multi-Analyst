@@ -17,6 +17,9 @@
                 <label for="{{ form.csv_file.id_for_label }}" class="form-label">Insira aqui sua base de dados (CSV)</label>
                 <input class="form-control" style="width: auto" type="file" name="{{ form.csv_file.html_name }}" id="{{ form.csv_file.id_for_label }}" required>
 
+                <label for="{{ form.context_description.id_for_label }}" class="form-label">Insira aqui uma breve descrição sobre sua base de dados:</label>
+                <textarea class="form-control" style="width: auto" name="{{ form.context_description.html_name }}" id="{{ form.context_description.id_for_label }}" required></textarea>
+
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
