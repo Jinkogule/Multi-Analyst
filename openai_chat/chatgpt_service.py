@@ -11,6 +11,6 @@ def generate_response(prompt):
             {"role": "user", "content": prompt},
         ],
         max_tokens=500,
-        temperature=0.5,
+        temperature=0.3,
     )
     return response['choices'][0]['message']['content'].strip()

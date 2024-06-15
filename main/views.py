@@ -37,9 +37,15 @@ def analise_basica(request):
         
         try:
             prompt = (
-                f"Os dados a seguir foram obtidos através de um processamento utilizando o algoritmo apriori sobre uma base de dados:\n{regras_html}\n\n Quais são os principais padrões identificados nos dados?"
+                f"Os dados a seguir foram obtidos através de um processamento utilizando o algoritmo apriori sobre uma base de dados:\n{regras}\n\n"
+                f"Considere que a ideia é identificar padrões e insights úteis para usuários leigos em análise de dados, além disso, formate a resposta de maneira que o subtítulo de cada item seja igual ao conteúdo contido entre parenteses em cada item:\n"
+                "1. Identifique padrões, tendências ou associações notáveis nos dados. (Padrões, tendências ou associações notáveis:)\n"
+                "2. Extraia insights gerais dessas associações. (Insights identificados:)\n"
+                "3. Explique como esses insights podem ser aplicados em um contexto prático. (Como estes insights podem ser úteis?)\n"
+                "4. Liste os principais insights de maneira clara e simples para um público geral. (Resumo:)\n"
             )
             insights = generate_response(prompt)
+
         except Exception as e:
             return HttpResponse(f'Erro ao gerar insights: {str(e)}')
         
