@@ -16,6 +16,13 @@
                     {{ error_message }}
                 </div>
             {% endif %}
+
+            <h2>Insights Gerados</h2>
+            <div>
+                <pre style="white-space: pre-wrap; /* Força a quebra de linha dentro da tag <pre> */
+            word-wrap: break-word;">{{ insights|safe }}</pre>
+            </div>
+
             {% for regra in regras %}
                 <p>{{ regra.1 }}</p>
                 {{ regra.0|safe }}
@@ -31,6 +38,7 @@
                 <button type="submit">Analisar colunas selecionadas</button>
             </form>
         </div>
+        
         <script src="{% static 'main/script.js' %}"></script>
     </body>
 </html>
