@@ -2,22 +2,17 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import pandas as pd
 from analise_apriori.apriori import carregar_dados, preprocessar_dados, gerar_regras_minimo
-from analise_apriori.forms import UploadFileForm
 from analise_apriori.utils import detectar_encoding, detectar_header
 from io import StringIO
 from openai_chat.chatgpt_service import generate_response
 
 def index(request):
-    if request.method == 'POST':
-        return analise_basica(request)
-    form = UploadFileForm()
-    return render(request, 'main/index.html', {'form': form})
+    return render(request, 'main/index.html')
 
 def analise_basica(request):
-    form = UploadFileForm(request.POST, request.FILES)
-    if form.is_valid():
+    if request.method == 'POST':
         try:
-            csv_file = request.FILES['csv_file']
+            csv_file = request.FILES.get('csv_file')
             csv_data = detectar_encoding(csv_file)
             csv_data_string_io = StringIO(csv_data)
         except UnicodeDecodeError as e:
@@ -36,7 +31,7 @@ def analise_basica(request):
             return HttpResponse(f'Erro ao gerar regras: {str(e)}')
         
         try:
-            context_description = form.cleaned_data['context_description']
+            context_description = request.POST.get('context_description')
 
             prompt = (
                 f"Os dados a seguir foram obtidos através de um processamento utilizando o algoritmo apriori sobre uma base de dados:\n{regras}\n\n"
@@ -51,10 +46,8 @@ def analise_basica(request):
 
         except Exception as e:
             return HttpResponse(f'Erro ao gerar insights: {str(e)}')
-        
         return render(request, 'main/analise_basica.html', {'regras': regras_html, 'insights': insights})
-    
-    return HttpResponse(f'Formulário inválido: {form.errors}')
+    return render(request, 'main/index.html')
 
 def analise_especifica(request):
     return HttpResponse('Teste')

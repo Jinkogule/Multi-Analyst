@@ -13,14 +13,15 @@
         <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff;">
             <form method="POST" action="{% url 'analise_basica' %}" enctype="multipart/form-data" class="form-group">
                 {% csrf_token %}
-                
-                <label for="{{ form.csv_file.id_for_label }}" class="form-label">Insira aqui sua base de dados (CSV)</label>
-                <input class="form-control" style="width: auto" type="file" name="{{ form.csv_file.html_name }}" id="{{ form.csv_file.id_for_label }}" required>
-
-                <label for="{{ form.context_description.id_for_label }}" class="form-label">Insira aqui uma breve descrição sobre sua base de dados:</label>
-                <textarea class="form-control" style="width: auto" name="{{ form.context_description.html_name }}" id="{{ form.context_description.id_for_label }}" required></textarea>
-
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <div class="mb-3">
+                    <label for="id_csv_file" class="form-label">Insira aqui sua base de dados (CSV)</label>
+                    <input class="form-control" style="width: auto" type="file" name="csv_file" id="id_csv_file" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_context_description" class="form-label">Insira aqui uma breve descrição sobre sua base de dados:</label>
+                    <textarea class="form-control" style="width: auto" name="context_description" id="id_context_description" rows="4" cols="50" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Enviar</button>
             </form>
         </div>
         <script src="{% static 'main/script.js' %}"></script>
