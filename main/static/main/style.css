@@ -1,10 +1,13 @@
 body{
     margin: 0 auto;
     background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);
+    font-family: 'Paprika', cursive !important;
+
 }
 
 .container{
     margin: 0 auto;
+    padding: 35px;
 }
 
 .container-navbar{
@@ -27,4 +30,17 @@ table{
 
 .navbar-brand{
     color: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(46,86,113,1) 100%);
+}
+
+.container-body{
+    background-color: rgba(0, 0, 0, 0.452);
+    color: #fff;
+    padding: 35px;
+}
+
+pre{
+    font-family: 'Caveat', cursive !important;
+    font-size: 1.5em !important;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }

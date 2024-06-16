@@ -5,12 +5,12 @@
     <head>
         <title>Multi Analyst</title>
         <link rel="stylesheet" href="{% static 'main/style.css' %}">
+        {% include 'comuns/fonts.html' %}
         <script src="{% static 'main/jquery-3.7.1.min.js' %}"></script>
-</head>
     </head>
     <body>
         {% include 'comuns/header.html' %}
-        <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff;">
+        <div class="container container-body">
             <form method="POST" action="{% url 'analise_basica' %}" enctype="multipart/form-data" class="form-group">
                 {% csrf_token %}
                 <div class="mb-3">
@@ -21,7 +21,7 @@
                     <label for="id_context_description" class="form-label">Insira aqui uma breve descrição sobre sua base de dados:</label>
                     <textarea class="form-control" style="width: auto" name="context_description" id="id_context_description" rows="4" cols="50" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mb-3">Enviar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
         <script src="{% static 'main/script.js' %}"></script>

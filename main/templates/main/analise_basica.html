@@ -3,22 +3,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multi Analyst</title>
+        <title>Multi Analyst - Insights</title>
         <link rel="stylesheet" href="{% static 'main/style.css' %}">
-        
-        {% include 'comuns/bootstrap_e_static.html' %}
-</head>
+        {% include 'comuns/fonts.html' %}
+        <script src="{% static 'main/jquery-3.7.1.min.js' %}"></script>
     </head>
     <body>
         {% include 'comuns/header.html' %}
-        <div class="container" style="background-color: rgba(0, 0, 0, 0.452); color: #fff">
+        <div class="container container-body">
             {% if error_message %}
                 <div style="color: rgb(201, 16, 16);">
                     {{ error_message }}
                 </div>
             {% endif %}
 
-            <h2>Insights Gerados</h2>
+            <h2>Insights Obtidos</h2>
             <pre>{{ insights|safe }}</pre>
 
             {% for regra in regras %}
