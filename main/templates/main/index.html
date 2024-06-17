@@ -14,7 +14,7 @@
             <form method="POST" action="{% url 'analise_basica' %}" enctype="multipart/form-data" class="form-group">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="id_csv_file" class="form-label">Insira aqui sua base de dados (CSV)</label>
+                    <label for="id_csv_file" class="form-label">Insira aqui sua base de dados (CSV):</label>
                     <input class="form-control" style="width: auto" type="file" name="csv_file" id="id_csv_file" required>
                 </div>
                 <div class="mb-3">
