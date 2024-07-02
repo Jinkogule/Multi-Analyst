@@ -1,13 +1,12 @@
 body{
-    margin: 0 auto;
+   
     background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);
-    font-family: 'Paprika', cursive !important;
+    font-family: 'Barlow', cursive !important;
 
 }
 
-.container{
-    margin: 0 auto;
-    padding: 35px;
+nav{
+    font-family: 'Caveat', cursive !important;
 }
 
 .container-navbar{
@@ -23,7 +22,7 @@ body{
 .bg-cyan-700{
     background-color: #2e716e;
 }
-
+ 
 table{
     color: #FFF;
 }
@@ -36,11 +35,12 @@ table{
     background-color: rgba(0, 0, 0, 0.452);
     color: #fff;
     padding: 35px;
+    padding-top: 15px;
 }
 
 pre{
-    font-family: 'Caveat', cursive !important;
-    font-size: 1.5em !important;
+    font-family: 'Barlow', cursive !important;
+    font-size: 1.3em !important;
     white-space: pre-wrap;
     word-wrap: break-word;
 }

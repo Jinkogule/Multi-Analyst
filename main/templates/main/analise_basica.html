@@ -18,24 +18,70 @@
             {% endif %}
 
             <h2>Insights Obtidos</h2>
-            <pre>{{ insights|safe }}</pre>
+            <div id="insights"></div>
 
             {% for regra in regras %}
-                <p>{{ regra.1 }}</p>
                 {{ regra.0|safe }}
+                <p>Obs: resultados obtidos sobre {{ regra.1 }}.</p>
             {% endfor %}
     
-            <form method="POST" action="{% url 'analise_especifica' %}">
-                {% csrf_token %}
-                <select name="colunas" id="colunas" multiple>
-                    {% for coluna in colunas %}
-                        <option value="{{ coluna }}">{{ coluna }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Analisar colunas selecionadas</button>
-            </form>
-        </div>
+            <div id="insights-container"></div>
         
-        <script src="{% static 'main/script.js' %}"></script>
+            <script>
+                $(document).ready(function(){
+                    const ws = new WebSocket('ws://127.0.0.1:8000/ws/insights/');
+
+                    ws.onopen = function(event) {
+                        console.log('Conexão WebSocket aberta');
+                    };
+
+                    ws.onmessage = function(event) {
+                        const data = JSON.parse(event.data);
+                        const message = data.message;
+                        const insightsContainer = document.getElementById('insights-container');
+                        
+                        if (message === '\n') {
+                            insightsContainer.innerHTML += '<br>';
+                        } else {
+                            insightsContainer.innerHTML += message;
+                        }
+                        
+                    };
+
+                    ws.onerror = function(error) {
+                        console.error('Erro na conexão WebSocket:', error);
+                    };
+
+                    ws.onclose = function(event) {
+                        console.log('Conexão WebSocket fechada');
+                    };
+
+                    const regras = '{{ regras_json|safe }}';
+                    const context_description = "{{ context_description }}";
+                    
+                    const data = {
+                        'regras': regras,
+                        'context_description': context_description
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/gerar_insights/',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                console.log('Geração de insights realizada com sucesso!');
+                            } else {
+                                console.error('Erro ao gerar insights:', response.message);
+                            }
+                        },
+                        error: function(error) {
+                            console.error('Erro ao gerar insights:', error);
+                        }
+                    });
+                });
+            </script>
+        </div>
     </body>
 </html>

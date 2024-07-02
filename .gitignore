@@ -3,6 +3,7 @@ __pycache__/
 db.sqlite3
 /media
 /static
+/staticfiles
 
 #Python bytecode
 *.py[cod]

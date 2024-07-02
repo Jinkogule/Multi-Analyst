@@ -32,13 +32,13 @@ def gerar_regras(conjuntos_itens_frequentes, min_threshold):
 
 def gerar_regras_minimo(df):
     combinacoes = [
-        (0.5, 0.7, "Sobre min_support=0.5 e min_threshold=0.7"),
-        (0.5, 0.3, "Sobre min_support=0.5 e min_threshold=0.3"),
-        (0.1, 0.7, "Sobre min_support=0.1 e min_threshold=0.7"),
-        (0.1, 0.3, "Sobre min_support=0.1 e min_threshold=0.3"),
-        (0.05, 0.5, "Sobre min_support=0.05 e min_threshold=0.5"),
-        (0.01, 0.5, "Sobre min_support=0.01 e min_threshold=0.5"),
-        (0.01, 0.1, "Sobre min_support=0.01 e min_threshold=0.1")
+        (0.5, 0.7, "suporte mínimo de 50% e limiar mínimo de 70%"),
+        (0.5, 0.3, "suporte mínimo de 50% e limiar mínimo de 30%"),
+        (0.1, 0.7, "suporte mínimo de 10% e limiar mínimo de 70%"),
+        (0.1, 0.3, "suporte mínimo de 10% e limiar mínimo de 30%"),
+        (0.05, 0.5, "suporte mínimo de 5% e limiar mínimo de 50%"),
+        (0.01, 0.5, "suporte mínimo de 1% e limiar mínimo de 50%"),
+        (0.01, 0.1, "suporte mínimo de 1% e limiar mínimo de 10%]")
     ]
     
     resultados = []
