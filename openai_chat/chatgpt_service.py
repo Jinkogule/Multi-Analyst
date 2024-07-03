@@ -1,11 +1,11 @@
 import asyncio
-import openai
+from openai import AsyncOpenAI
 from django.conf import settings
 
-openai.api_key = settings.OPENAI_API_KEY
+openai_client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
 async def generate_response(prompt, channel_layer, room_group_name):
-    response = await openai.ChatCompletion.acreate(
+    stream = await openai_client.chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
@@ -16,9 +16,9 @@ async def generate_response(prompt, channel_layer, room_group_name):
         stream=True,
     )
 
-    async for chunk in response:
-        if 'choices' in chunk and len(chunk['choices']) > 0:
-            content = chunk['choices'][0].get('delta', {}).get('content', '')
+    async for chunk in stream:
+        if chunk.choices and len(chunk.choices) > 0:
+            content = chunk.choices[0].delta.content
             if content:
                 for char in content:
                     await channel_layer.group_send(
