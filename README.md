@@ -1,5 +1,5 @@
 <div align="center">
-<img style="" src="https://github.com/Jinkogule/multi_analyst/blob/static/img/logo.png" width="250px;" alt=""/>
+<img style="" src="https://github.com/Jinkogule/Multi-Analyst/blob/main/static/img/logo.png" width="250px;" alt=""/>
 <br>
 
 [![Release](https://img.shields.io/github/v/release/Jinkogule/multi-Analyst?style=for-the-badge)](https://github.com/Jinkogule/PokeApp/releases)
